@@ -1,0 +1,33 @@
+extends layout 
+
+block content 
+  h1=title
+  -
+    var results=[
+      {
+        tablet_name: 'Dolo 650',
+        company_name: 'Dolo',
+        tablet_dosage: 1
+      },
+      {
+        tablet_name: 'Aceclo plus',
+        company_name: 'Glenmark',
+        tablet_dosage: 1
+      },
+      {
+        tablet_name: 'Pantop',
+        company_name: 'Glaxo',
+        tablet_dosage: 20
+      }
+    ];
+  div.container-fluid
+    div.row
+      each tablet,index in results
+        div.col-sm-2(onclick=`buy(${index})`) #{tablet.tablet_name} <br> #{tablet.company_name} <br> #{tablet.tablet_dosage}
+        
+
+  script.
+     function buy(itemNo)
+      {
+        alert(`Places to visit ${itemNo+1}`)
+      }
