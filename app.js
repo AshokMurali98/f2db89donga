@@ -4,12 +4,31 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('dotenv').config();
+const connectionString =
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+{useNewUrlParser: true,
+useUnifiedTopology: true});
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
+
+
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var tabletRouter = require('./routes/tablet');
 var gridBuildRouter = require('./routes/gridbuild');
 var selectorRouter = require('./routes/selector');
-
+var tablet = require("./models/tablet");
+var resourcesRouter = require("./routes/resources");
 
 var app = express();
 
@@ -28,6 +47,8 @@ app.use('/users', usersRouter);
 app.use('/tablet', tabletRouter);
 app.use('/gridbuild', gridBuildRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourcesRouter);
+
 
 
 // catch 404 and forward to error handler
@@ -46,4 +67,27 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+async function recreateDB(){
+  // Delete everything
+  await tablet.deleteMany();
+  let instance1 = new tablet({tablet_name:"Dolo 650", company_name:'Dolo',tablet_dosage:25.4});
+  instance1.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("First object saved")
+  });
+
+  let instance2 = new tablet({tablet_name:"Acelo", company_name:'Glenmark',tablet_dosage:25.5});
+  instance2.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("Second object saved")
+  });
+ }
+
+
+ 
+ let reseed = true;
+ if (reseed) { recreateDB();}
+
 module.exports = app;
+
+
