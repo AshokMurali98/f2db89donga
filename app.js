@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/tablet', tabletRouter);
+app.use('/tablets', tabletRouter);
 app.use('/gridbuild', gridBuildRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourcesRouter);
@@ -76,11 +76,18 @@ async function recreateDB(){
   console.log("First object saved")
   });
 
-  let instance2 = new tablet({tablet_name:"Acelo", company_name:'Glenmark',tablet_dosage:25.5});
+  let instance2 = new tablet({tablet_name:"Acelo", company_name:'Glenmark',tablet_dosage:15.5});
   instance2.save( function(err,doc) {
   if(err) return console.error(err);
   console.log("Second object saved")
   });
+
+  let instance3 = new tablet({tablet_name:"Paracetmol", company_name:'Aurbindho',tablet_dosage:1.5});
+  instance3.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("Thrid object saved")
+  });
+
  }
 
 
