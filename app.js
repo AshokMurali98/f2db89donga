@@ -30,6 +30,7 @@ var selectorRouter = require('./routes/selector');
 var tablet = require("./models/tablet");
 var resourcesRouter = require("./routes/resources");
 
+
 var app = express();
 
 // view engine setup

@@ -6,9 +6,13 @@ block content
     div.row
       each tablet,index in results
         div.col-sm-2(onclick=`buy(${index})`) #{tablet.tablet_name} <br> #{tablet.company_name} <br> #{tablet.tablet_dosage}
-    button(name="Edit" class="btn btn-info" onclick="edit()") Edit
+        <br>
+    <br>
+    button(name="ok" class="btn btn-info" onclick="edit()") Ok
         br
-        button(name="Edit") Delete 
+    button(name="save" class="btn btn-success" onclick="delete()" ) Save 
+    button(name="update" class="btn btn-warning" onclick="save()") Update
+    button(name="delete" class="btn btn-danger" onclick="update()") Delete
 
   script.
      function buy(itemNo)
