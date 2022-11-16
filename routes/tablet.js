@@ -6,6 +6,14 @@ var router = express.Router();
 router.get('/', tablet_controlers.tablet_view_all_Page);
 router.get('/tablets/:id', tablet_controlers.tablet_detail);
 
+router.get('/detail', tablet_controlers.tablet_view_one_Page);
+
+/* GET create Tabler page */
+router.get('/create', tablet_controlers.tablet_create_Page);
+
+/* GET create update page */
+router.get('/update', tablet_controlers.tablet_update_Page);
+
 module.exports = router;
 
 

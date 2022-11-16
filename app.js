@@ -49,6 +49,7 @@ app.use('/tablets', tabletRouter);
 app.use('/gridbuild', gridBuildRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourcesRouter);
+//app.use('/detail', tabletRouter);
 
 
 
