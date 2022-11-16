@@ -1,7 +1,20 @@
 extends layout
 block content
   h1= title
-  form(id='TabletForm', action="/resource/tablets", method="POST")
+  if (toShow== null)
+    h2 There is no instance to update
+  else 
+    - let tabletid = toShow._id
+    - let tabletname = toShow.tablet_name
+    - let companyname = toShow.company_name
+    - let tabletdosage = toShow.tablet_dosage
+
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{tabletid}
+    - let actionid = "/resource/tablets" + tabletid
+
+  form(id='TabletForm', action="actionid,", method="PUT")
     div.form-group
         label.tabletAttr(for='tablet_name') Tablet Name
         input#tablet_name(type='text', name='tablet_name')
@@ -17,7 +30,7 @@ block content
       event.preventDefault();
      // TODO do something here to show user that form is being submitted
       fetch(event.target.action, {
-        method: 'POST',
+        method: 'PUT',
         body: new URLSearchParams(new FormData(event.target)) // event.target is the form
       }).then((resp) => {
         return resp.json(); // or resp.text() or whatever the server sends
