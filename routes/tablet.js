@@ -14,6 +14,9 @@ router.get('/create', tablet_controlers.tablet_create_Page);
 /* GET create update page */
 router.get('/update', tablet_controlers.tablet_update_Page);
 
+/* GET delete costume page */
+router.get('/delete', tablet_controlers.tablet_delete_Page);
+
 module.exports = router;
 
 
