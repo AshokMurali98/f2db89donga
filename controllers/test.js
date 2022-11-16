@@ -35,9 +35,23 @@ exports.tablet_create_post = function(req, res) {
  res.send('NOT IMPLEMENTED: Tablet create POST');
 };
 // Handle Costume delete form on DELETE.
-exports.tablet_delete = function(req, res) {
+/*exports.tablet_delete = function(req, res) {
  res.send('NOT IMPLEMENTED: Tablet delete DELETE ' + req.params.id);
-};
+}; */
+
+// Handle Costume delete on DELETE.
+exports.tablet_delete = async function(req, res) {
+  console.log("delete " + req.params.id)
+  try {
+  result = await Tablet.findByIdAndDelete( req.params.id)
+  console.log("Removed " + result)
+  res.send(result)
+  } catch (err) {
+  res.status(500)
+  res.send(`{"error": Error deleting ${err}}`);
+  }
+  };
+
 // Handle Costume update form on PUT.
 exports.tablet_update_put =  async function(req, res) {
  //res.send('NOT IMPLEMENTED: Tablet update PUT' + req.params.id);
