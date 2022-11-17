@@ -1,44 +1,48 @@
 extends layout
 block content
-  h1= title
-  if (toShow== null)
-    h2 There is no instance to update
-  else 
+  h1(class='container-fluid p-5 bg-sucess text-success text-center')= title
+  if (toShow == null)
+    h2 No instance to update
+  else
     - let tabletid = toShow._id
     - let tabletname = toShow.tablet_name
     - let companyname = toShow.company_name
     - let tabletdosage = toShow.tablet_dosage
 
-    div.row(class='mb-2')
-      div.mr-1 ID is
-      div #{tabletid}
-    - let actionid = "/resource/tablets" + tabletid
+    div.row(class='d-flex justify-content-center p-2 bg-light text-center text-danger')
+     div.mr-1(class='p-2 flex-fill') ID is
+     div #{tabletid}
+    - let actionid = "/resource/tablets/" + tabletid
 
-  form(id='TabletForm', action="actionid,", method="PUT")
-    div.form-group
-        label.tabletAttr(for='tablet_name') Tablet Name
-        input#tablet_name(type='text', name='tablet_name')
-    div.form-group
-        label.tabletAttr(for='companyname') Company Name
-        input#company_name(type='text', name='companyname')
-    div.form-group
-        label.tabletAttr(for='tabletdosage') Costume cost
-        input#tablet_dosage(type='number', name='tabletdosage')
-    input(type="submit")
+    form(id='TabletForm', class='d-flex justify-content-center p-2 bg-light text-center text-danger',action=actionid, method="PUT")
+      div.form-group
+        label.tabletAttr(for='tablet_name' style="margin-right:5px;") Tablet Name
+        input#tablet_name(type='text', name='tablet_name', value='tabletname', style="width: 200px")
+     
+      div(class='d-flex justify-content-center p-2 bg-light text-center text-danger').form-group
+        label.tabletAttr(for='company_name' style="margin-right:5px") Company Name
+        input#company_name(type='text', name='company_name',value='companyname' style="width: 200px")
+        
+      div(class='d-flex justify-content-center p-2 bg-light text-center text-danger').form-group
+        label.tabletAttr(for='tablet_dosage' style="margin-right:5px") Costume cost
+        input#tablet_dosage(type='number', name='tablet_dosage',value=2 style="width: 200px")
+      
+        input(type="submit")
+
   script.
     document.forms['TabletForm'].addEventListener('submit', (event) => {
-      event.preventDefault();
+     event.preventDefault();
      // TODO do something here to show user that form is being submitted
-      fetch(event.target.action, {
-        method: 'PUT',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-      }).then((resp) => {
-        return resp.json(); // or resp.text() or whatever the server sends
-      }).then((body) => {
-        alert("Save succeded")
+     fetch(event.target.action, {
+      method: 'PUT',
+      body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+     }).then((resp) => {
+      return resp.json(); // or resp.text() or whatever the server sends
+     }).then((body) => {
+      alert("Save succeded")
        // TODO handle body
-      }).catch((error) => {
+    }).catch((error) => {
       // TODO handle error
-        alert("Save failed " + error )
-      });
+      alert("Save failed " + error )
     });
+   });

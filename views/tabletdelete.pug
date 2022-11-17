@@ -1,34 +1,36 @@
 extends layout
 block content
  h1= title
- - let tabletid = toShow._id
- - let tabletname = toShow.tablet_name
- - let companyname = toShow.company_name
- - let tabletdosage = toShow.tablet_dosage
+ if (toShow == null)
+  h2 No instance to delete
+ else
+  - let tabletid = toShow._id
+  - let tabletname = toShow.tablet_name
+  - let companyname = toShow.company_name
+  - let tabletdosage = toShow.tablet_dosage
 
- - let actionId = "/resource/tablets" + tabletid
- script let actionId= "#{actionId}"
- div
-  div.row
-   div(class='tabletAttr mr-3') Tablet ID is:
-   div #{tabletid}
-  div.row
-   div(class='tabletAttr mr-3') Tablet Name is:
-   div #{tabletname}
-  div.row
-   div(class='tabletAttr mr-3') Tablet Company is:
-   div #{companyname}
-  div.row
-   div(class='tabletAttr mr-3') Tablet Dosage is:
-   div #{tabletdosage}
- div
-   button(class="btn btn-danger m-2" onclick="deleteId()") Delete
-   button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+  - let actionId = "/resource/tablets/" + tabletid
+  script let actionId= "#{actionId}"
+  div
+   div.row
+    div(class='tabletAttr mr-3') Tablet ID is:
+    div #{tabletid}
+   div.row
+    div(class='tabletAttr mr-3') Tablet Name is:
+    div #{tabletname}
+   div.row
+    div(class='tabletAttr mr-3') Tablet Company is:
+    div #{companyname}
+   div.row
+    div(class='tabletAttr mr-3') Tablet Dosage is:
+    div #{tabletdosage}
+  button(class="btn btn-danger m-2" onclick="deleteId()") Delete
+  button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
 
  
  script. 
    function cancel() {
-    window.location.href='/tablet'
+    window.location.href='/tablets'
    }
  script. 
    function  deleteId() {
@@ -40,6 +42,7 @@ block content
         return resp.json(); // or resp.text() or whatever the server sends
       }).then((body) => {
         alert("Delete succeded")
+        window.location.href='/tablets'
        // TODO handle body
       }).catch((error) => {
       // TODO handle error

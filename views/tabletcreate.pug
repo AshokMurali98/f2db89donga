@@ -1,31 +1,36 @@
 extends layout
 block content
-  h1= title
-  form(id='TabletForm', action="/resource/tablets", method="POST")
-    div.form-group
-        label.tabletAttr(for='tablet_name') Tablet Name
-        input#tablet_name(type='text', name='tablet_name')
-    div.form-group
-        label.tabletAttr(for='companyname') Company Name
-        input#company_name(type='text', name='companyname')
-    div.form-group
-        label.tabletAttr(for='tabletdosage') Costume cost
-        input#tablet_dosage(type='number', name='tabletdosage')
-    input(type="submit")
-  script.
-    document.forms['TabletForm'].addEventListener('submit', (event) => {
-      event.preventDefault();
-     // TODO do something here to show user that form is being submitted
-      fetch(event.target.action, {
-        method: 'POST',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-      }).then((resp) => {
-        return resp.json(); // or resp.text() or whatever the server sends
-      }).then((body) => {
-        alert("Save succeded")
-       // TODO handle body
-      }).catch((error) => {
-      // TODO handle error
-        alert("Save failed " + error )
-      });
-    });
+ h1= title
+ form(id='TabletForm', action="/resource/tablets", method="POST")
+  div.form-group
+    label.tabletAttr(for='tablet_name') Tablet Name
+    input#tablet_name(type='text', name='tablet_name')
+  <br>
+  div.form-group
+    label.tabletAttr(for='company_name') Company Name
+    input#company_name(type='text', name='company_name')
+  div.form-group
+  <br>
+    label.tabletAttr(for='tablet_dosage') Tablet Quantity
+    input#tablet_dosage(type='number', name='tablet_dosage')
+  <br>
+  <br>  
+  input(type="submit")
+
+ script.
+  document.forms['TabletForm'].addEventListener('submit', (event) => {
+   event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+   fetch(event.target.action, {
+    method: 'POST',
+    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+   }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+   }).then((body) => {
+    alert("Save succeded")
+    // TODO handle body
+   }).catch((error) => {
+    // TODO handle error
+    alert("Save failed " + error )
+   });
+  });
