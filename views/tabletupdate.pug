@@ -17,15 +17,15 @@ block content
     form(id='TabletForm', class='d-flex justify-content-center p-2 bg-light text-center text-danger',action=actionid, method="PUT")
       div.form-group
         label.tabletAttr(for='tablet_name' style="margin-right:5px;") Tablet Name
-        input#tablet_name(type='text', name='tablet_name', value='tabletname', style="width: 200px")
+        input#tablet_name(type='text', name='tablet_name', value=tabletname, style="width: 200px")
      
       div(class='d-flex justify-content-center p-2 bg-light text-center text-danger').form-group
         label.tabletAttr(for='company_name' style="margin-right:5px") Company Name
-        input#company_name(type='text', name='company_name',value='companyname' style="width: 200px")
+        input#company_name(type='text', name='company_name',value=companyname, style="width: 200px")
         
       div(class='d-flex justify-content-center p-2 bg-light text-center text-danger').form-group
-        label.tabletAttr(for='tablet_dosage' style="margin-right:5px") Costume cost
-        input#tablet_dosage(type='number', name='tablet_dosage',value=2 style="width: 200px")
+        label.tabletAttr(for='tablet_dosage' style="margin-right:5px") Tablet Dosage
+        input#tablet_dosage(type='number', name='tablet_dosage',value=tabletdosage ,style="width: 200px")
       
         input(type="submit")
 
